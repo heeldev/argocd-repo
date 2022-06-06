@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-repo
+  namespace: argocd
+  labels:
+    name: istio-circuit-breaker
+spec:
+  # The project the application belongs to.
+  project: default
+  source:
+    repoURL: https://github.com/heeldev/argocd-repo.git
+    targetRevision: HEAD
+    path: istio-circuit-breaker
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selHeal: true
+      prune: true
