@@ -1,0 +1,32 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sa-cli-pod
+  namespace: iko
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cli-pod
+  namespace: iko
+  labels:
+    app: cli-pod
+  annotations:
+    proxy.istio.io/config: |-
+      proxyStatsMatcher:
+        inclusionPrefixes:
+        - "cluster.outbound"
+        - "cluster_manager"
+        - "listener_manager"
+        - "server"
+        - "cluster.xds-grpc"
+spec:
+  serviceAccountName: sa-cli-pod
+  containers:
+    - name: cli-container
+      command:
+        - sleep
+        - "86400"
+      image: praqma/network-multitool
+      imagePullPolicy: IfNotPresent
