@@ -5,19 +5,19 @@ metadata:
   name: cli-pod
   labels:
     app: cli-pod
-  annotations:
-    proxy.istio.io/config: |-
-      proxyStatsMatcher:
-        inclusionPrefixes:
-        - "cluster.outbound"
-        - "cluster_manager"
-        - "listener_manager"
-        - "server"
-        - "cluster.xds-grpc"
+  # annotations:
+  #   proxy.istio.io/config: |-
+  #     proxyStatsMatcher:
+  #       inclusionPrefixes:
+  #       - "cluster.outbound"
+  #       - "cluster_manager"
+  #       - "listener_manager"
+  #       - "server"
+  #       - "cluster.xds-grpc"
 spec:
   serviceAccountName: sa-cli-pod
   containers:
-    - name: cli-container
+    - name: network-multitool
       command:
         - sleep
         - "86400"
