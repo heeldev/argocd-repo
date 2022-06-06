@@ -4,14 +4,13 @@ metadata:
   name: argocd-repo
   namespace: argocd
   labels:
-    name: istio-circuit-breaker
+    name: argocd
 spec:
-  # The project the application belongs to.
   project: default
   source:
     repoURL: https://github.com/heeldev/argocd-repo.git
     targetRevision: HEAD
-    path: istio-circuit-breaker
+    path: k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: default
